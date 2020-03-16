@@ -1,0 +1,15 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/sample-next-firebase/firebase', '.']
+- name: 'gcr.io/sample-next-firebase/firebase'
+  args: ['projects:list']
+  secretEnv: ['FIREBASE_TOKEN']
+
+secrets:
+- kmsKeyName: 'projects/sample-next-firebase/locations/global/keyRings/cloudbuilder/cryptoKeys/firebase-token'
+  secretEnv:
+    FIREBASE_TOKEN: 'CiQA9VSL0/KdL82YpbLk3Hd3iL19yBawLQuoceDAUjv/INgZChISkAEAA6omsFYGSDzyr1cEJmDkNXixQYqXNwSRrtdZbJUbHtEDVLIhcfWp4QSWK1tmWPkh6qc75UKDD/CyjU4F2NiXUG/4eRZW9zLIqRKr9KHQp531Ltd9CDzYwRMyT5msPHfMcg+w9GNG3siCY7mrq9T+WF0Cv9ke0BhJuD94gN83uECdAeh+XKFH3LPIHQeeWpg='
+
+images:
+  - 'gcr.io/sample-next-firebase/firebase'
+tags: ['cloud-builders-community']
